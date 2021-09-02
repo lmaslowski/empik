@@ -13,12 +13,12 @@ import java.util.function.Function;
 @Service
 @AllArgsConstructor
 @Transactional
-public class UserEventHandler {
+class UserEventHandler {
 
     private final Counters counters;
 
     @EventListener
-    public void handle(UserVisited event) {
+    void handle(UserVisited event) {
         final String login = event.getLogin();
         final Counter counter = counters.findByLogin(login)
                 .map(transform())
