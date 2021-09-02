@@ -1,6 +1,8 @@
 package empik.kata.restapi.counting.application;
 
 import empik.kata.restapi.common.EventPublisher;
+import empik.kata.restapi.common.EventsConfig;
+import empik.kata.restapi.counting.CountingConfig;
 import empik.kata.restapi.counting.model.domain.Counter;
 import empik.kata.restapi.counting.model.port.Counters;
 import empik.kata.restapi.users.model.domain.events.UserVisited;
@@ -15,7 +17,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@SpringBootTest
+@SpringBootTest(classes = {CountingConfig.class, EventsConfig.class})
 @Transactional
 class UserEventHandlerIT {
 
