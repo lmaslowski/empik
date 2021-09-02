@@ -1,5 +1,6 @@
 package empik.kata.restapi.users.infrastructure.web;
 
+import empik.kata.restapi.users.UsersConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -17,19 +18,15 @@ import static org.hamcrest.Matchers.nullValue;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = UsersConfig.class)
 @AutoConfigureMockMvc
 class UsersResourceIT {
-
-    @LocalServerPort
-    private int port;
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
     void contextLoad() {
-        assertNotNull(port);
         assertNotNull(mockMvc);
     }
 

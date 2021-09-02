@@ -1,4 +1,4 @@
-package empik.kata.restapi.users.infrastructure.publisher;
+package empik.kata.restapi.common.publisher;
 
 import empik.kata.restapi.common.DomainEvent;
 import empik.kata.restapi.common.EventPublisher;
