@@ -1,7 +1,9 @@
 package empik.kata.restapi;
 
+import empik.kata.restapi.counting.CountingConfig;
 import empik.kata.restapi.counting.model.domain.Counter;
 import empik.kata.restapi.counting.model.port.Counters;
+import empik.kata.restapi.users.UsersConfig;
 import empik.kata.restapi.users.model.domain.UserData;
 import empik.kata.restapi.users.model.domain.UserNotFoundException;
 import org.junit.jupiter.api.Test;
@@ -16,7 +18,11 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {
+        App.class,
+        UsersConfig.class,
+        CountingConfig.class
+})
 @SuppressWarnings("ConstantConditions")
 class AppIT {
 
