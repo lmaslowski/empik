@@ -87,7 +87,7 @@ class AppIT {
     @Test
     void givenServiceIsWorking_whenRequestLoginThatNotExist_thenCounterNotStored() {
         final String login = "octocat";
-
+      
         final ExceptionHandlingAdvice.ErrorView errorViewExpected = ExceptionHandlingAdvice.ErrorView
                 .builder()
                 .exception((UserNotFoundException.class.getCanonicalName())).build();
