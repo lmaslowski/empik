@@ -76,6 +76,12 @@ class UsersResourceIT {
     void shouldThrowExceptionWhenUserNotExists() throws Exception {
         final String login = "octocattnotexist01";
 
+        wireMockServer.stubFor(WireMock.get(WireMock.urlEqualTo("/users/" + login))
+                .willReturn(aResponse()
+                        .withStatus(HttpStatus.OK.ordinal())
+                        .withHeader("content-type", ContentType.APPLICATION_JSON.toString())
+                        .withBody(("nonvalidresponse").getBytes())));
+
         mockMvc.perform(MockMvcRequestBuilders.get("/users/" + login).contentType(MediaType.APPLICATION_JSON))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isNotFound())

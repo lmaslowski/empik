@@ -42,9 +42,6 @@ class AppIT {
     private int port;
 
     @Autowired
-    private RestTemplate restTemplate;
-
-    @Autowired
     private TestRestTemplate testRestTemplate;
 
     @Autowired
@@ -61,7 +58,6 @@ class AppIT {
 
     @Test
     void contextLoad() {
-        assertThat(restTemplate).isNotNull();
         assertThat(testRestTemplate).isNotNull();
         assertThat(wireMockServer).isNotNull();
         assertThat(objectMapper).isNotNull();
@@ -91,8 +87,7 @@ class AppIT {
     @Test
     void givenServiceIsWorking_whenRequestLoginThatNotExist_thenCounterNotStored() {
         final String login = "octocat";
-        final byte[] bytes = ("nonvalidresponse").getBytes();
-
+      
         final ExceptionHandlingAdvice.ErrorView errorViewExpected = ExceptionHandlingAdvice.ErrorView
                 .builder()
                 .exception((UserNotFoundException.class.getCanonicalName())).build();
@@ -101,7 +96,7 @@ class AppIT {
                 .willReturn(aResponse()
                         .withStatus(HttpStatus.OK.ordinal())
                         .withHeader("content-type", ContentType.APPLICATION_JSON.toString())
-                        .withBody(bytes)));
+                        .withBody(("nonvalidresponse").getBytes())));
 
         assertThat(testRestTemplate.getForObject("http://localhost:" + port + "/users/" + login,
                 ExceptionHandlingAdvice.ErrorView.class))
