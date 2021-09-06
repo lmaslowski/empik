@@ -3,7 +3,6 @@ package empik.kata.restapi.counting.infrastructure.persistence;
 import empik.kata.restapi.counting.model.domain.Counter;
 import empik.kata.restapi.counting.model.port.Counters;
 import lombok.AllArgsConstructor;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;

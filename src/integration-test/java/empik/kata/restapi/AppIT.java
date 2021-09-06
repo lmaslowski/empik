@@ -19,6 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
+import org.springframework.test.annotation.DirtiesContext;
 
 import java.io.InputStream;
 import java.util.Optional;
@@ -33,6 +34,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
         UsersConfig.class,
         CountingConfig.class
 })
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 class AppIT {
 
     private WireMockServer wireMockServer;
@@ -101,7 +103,7 @@ class AppIT {
                 ExceptionHandlingAdvice.ErrorView.class))
                 .isEqualTo(errorViewExpected);
 
-        assertEquals(Optional.empty(), counters.findByLogin(login));
+        assertEquals(Optional.of(Counter.create(login, 1)), counters.findByLogin(login));
     }
 
     @AfterEach

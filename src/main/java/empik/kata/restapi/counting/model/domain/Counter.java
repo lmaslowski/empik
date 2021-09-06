@@ -3,6 +3,7 @@ package empik.kata.restapi.counting.model.domain;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Objects;
@@ -15,22 +16,24 @@ public class Counter {
     @Id
     private UUID id;
 
+    @Column(name = "LOGIN")
     private String login;
 
-    private int counter;
+    @Column(name = "REQUEST_COUNT")
+    private int requestCount;
 
     private Counter(String login) {
         this(login, 1);
     }
 
-    private Counter(String login, int counter) {
+    private Counter(String login, int requestCount) {
         this.id = UUID.randomUUID();
         this.login = login;
-        this.counter = counter;
+        this.requestCount = requestCount;
     }
 
     public Counter increment() {
-        return new Counter(login, counter + 1);
+        return new Counter(login, requestCount + 1);
     }
 
     public static Counter create(String login, int counter) {
@@ -50,11 +53,11 @@ public class Counter {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Counter counter1 = (Counter) o;
-        return counter == counter1.counter && Objects.equals(login, counter1.login);
+        return requestCount == counter1.requestCount && Objects.equals(login, counter1.login);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(login, counter);
+        return Objects.hash(login, requestCount);
     }
 }
