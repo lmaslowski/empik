@@ -19,7 +19,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.InputStream;
 import java.util.Optional;
@@ -87,7 +86,7 @@ class AppIT {
     @Test
     void givenServiceIsWorking_whenRequestLoginThatNotExist_thenCounterNotStored() {
         final String login = "octocat";
-      
+
         final ExceptionHandlingAdvice.ErrorView errorViewExpected = ExceptionHandlingAdvice.ErrorView
                 .builder()
                 .exception((UserNotFoundException.class.getCanonicalName())).build();
