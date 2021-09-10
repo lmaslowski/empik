@@ -33,8 +33,8 @@ class UserEventHandlerTest {
 
     @Test
     void contextLoad() {
-       assertNotNull(repository);
-       assertNotNull(userEventHandler);
+        assertNotNull(repository);
+        assertNotNull(userEventHandler);
     }
 
     @Test
