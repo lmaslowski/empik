@@ -17,8 +17,17 @@ public class UserServiceAspect {
 
     private final EventPublisher eventPublisher;
 
-    @After("execution(* UserQueryService.getUser(..))")
+    @After("execution(* UserQueryServiceBlocking.getUser(..))")
     public void publish(JoinPoint joinPoint) {
+        doExecute(joinPoint);
+    }
+
+    @After("execution(* UserQueryServiceNonBlocking.getUser(..))")
+    public void publishNonBlocking(JoinPoint joinPoint) {
+        doExecute(joinPoint);
+    }
+
+    private void doExecute(JoinPoint joinPoint) {
         final Object[] args = joinPoint.getArgs();
         final String login = (String) args[0];
         eventPublisher.publish(new UserVisited(UUID.randomUUID(), login));

@@ -2,9 +2,11 @@ package empik.kata.restapi.users.model.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.ToString;
 
 @AllArgsConstructor
 @Builder
+@ToString
 public class User {
 
     private final String id;
