@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono;
 import java.util.Optional;
 
 @Service
-public class GitHubUsersServiceNonBlocking implements GitHubUsers<Mono<Optional<GitHubUser>>> {
+class GitHubUsersServiceNonBlocking implements GitHubUsers<Mono<Optional<GitHubUser>>> {
 
     private final String httpApiGithubUsers;
     private final RestTemplate restTemplate;
