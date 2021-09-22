@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono;
 import java.util.Optional;
 
 @Service
-public class GitHubUsersServiceNonBlocking implements GitHubUsers<Mono<GitHubUser>> {
+public class GitHubUsersServiceNonBlocking implements GitHubUsers<Mono<Optional<GitHubUser>>> {
 
     private final String httpApiGithubUsers;
     private final RestTemplate restTemplate;
@@ -21,8 +21,16 @@ public class GitHubUsersServiceNonBlocking implements GitHubUsers<Mono<GitHubUse
     }
 
     @Override
-    public Mono<GitHubUser> findByLogin(String login) {
-        return Mono.fromCallable(() -> this.a(login));
+    public Mono<Optional<GitHubUser>> findByLogin(String login) {
+        return Mono.fromCallable(() -> this.anOptional(login));
+    }
+
+    private Optional<GitHubUser> anOptional(String login) {
+        try {
+            return Optional.ofNullable(restTemplate.getForEntity(String.format(httpApiGithubUsers, login), GitHubUser.class).getBody());
+        } catch (RestClientException e) {
+            return Optional.empty();
+        }
     }
 
     private GitHubUser a(String login) {
@@ -30,14 +38,6 @@ public class GitHubUsersServiceNonBlocking implements GitHubUsers<Mono<GitHubUse
             return restTemplate.getForEntity(String.format(httpApiGithubUsers, login), GitHubUser.class).getBody();
         } catch (RestClientException e) {
             throw new UserNotFoundException();
-        }
-    }
-
-    private Optional<GitHubUser> aOptional(String login) {
-        try {
-            return Optional.ofNullable(restTemplate.getForEntity(String.format(httpApiGithubUsers, login), GitHubUser.class).getBody());
-        } catch (RestClientException e) {
-            return Optional.empty();
         }
     }
 }

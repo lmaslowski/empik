@@ -21,9 +21,11 @@ public class UserQueryServiceNonBlocking implements UserQueryService<Mono<UserVi
     public Mono<UserView> getUser(String login) {
         return users
                 .find(login)
+                .log()
                 .publishOn(Schedulers.parallel())
                 .doOnNext(user -> log.info("Fetched User: {}", user))
                 .map(User::getUserView)
-                .doOnNext(userView -> log.info("Mapped to UserView: {}", userView));
+                .doOnNext(userView -> log.info("Mapped to UserView: {}", userView))
+                .doOnError(throwable -> log.error("{} {}", throwable.getClass().getCanonicalName(), throwable.getMessage()));
     }
 }
