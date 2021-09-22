@@ -1,10 +1,6 @@
 package empik.kata.restapi.users.model.port;
 
-import empik.kata.restapi.users.model.domain.User;
+public interface Users<T> {
 
-import java.util.Optional;
-
-public interface Users {
-
-    Optional<User> find(String login);
+    T find(String login);
 }

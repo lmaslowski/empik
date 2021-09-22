@@ -14,7 +14,17 @@ class UserFactory {
     }
 
     private User build(GitHubUser gitHubUser, CalculatorPolicy calculatorPolicy) {
-        final UserData userData = UserData.builder()
+        final UserData userData = map(gitHubUser);
+
+        return User.builder()
+                .id(userData.getId())
+                .userData(userData)
+                .calculatorPolicy(calculatorPolicy)
+                .build();
+    }
+
+    private UserData map(GitHubUser gitHubUser) {
+        return UserData.builder()
                 .id(gitHubUser.getId())
                 .login(gitHubUser.getLogin())
                 .name(gitHubUser.getName())
@@ -23,12 +33,6 @@ class UserFactory {
                 .createdAt(gitHubUser.getCreatedAt())
                 .followers(gitHubUser.getFollowers())
                 .publicRepos(gitHubUser.getPublicRepos())
-                .build();
-
-        return User.builder()
-                .id(userData.getId())
-                .userData(userData)
-                .calculatorPolicy(calculatorPolicy)
                 .build();
     }
 }

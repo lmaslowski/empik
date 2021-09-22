@@ -1,10 +1,12 @@
 package empik.kata.restapi.users.model.domain.events;
 
 import empik.kata.restapi.common.DomainEvent;
+import lombok.ToString;
 
 import java.time.Instant;
 import java.util.UUID;
 
+@ToString
 public class UserVisited implements DomainEvent {
 
     private final UUID eventId;

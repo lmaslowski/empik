@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Service
 @Slf4j
-class GitHubUsersService implements GitHubUsers {
+class GitHubUsersService implements GitHubUsers<Optional<GitHubUser>> {
 
     private final String httpApiGithubUsers;
     private final RestTemplate restTemplate;

@@ -7,12 +7,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(access = AccessLevel.PACKAGE)
 @Getter
+@ToString
 class GitHubUser {
 
     @JsonProperty("id")

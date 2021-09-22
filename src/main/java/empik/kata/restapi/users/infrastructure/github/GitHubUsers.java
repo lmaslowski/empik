@@ -1,8 +1,6 @@
 package empik.kata.restapi.users.infrastructure.github;
 
-import java.util.Optional;
+interface GitHubUsers<T> {
 
-interface GitHubUsers {
-
-    Optional<GitHubUser> findByLogin(String login);
+    T findByLogin(String login);
 }

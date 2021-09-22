@@ -2,12 +2,14 @@ package empik.kata.restapi.users.model.domain;
 
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
 @Builder(access = AccessLevel.PUBLIC)
 @Getter
 @ToString
+@EqualsAndHashCode
 public class UserView {
 
     private final String id;
