@@ -4,6 +4,7 @@ package empik.kata.restapi.users.application;
 import empik.kata.restapi.users.UsersConfig;
 import empik.kata.restapi.users.model.domain.User;
 import empik.kata.restapi.users.model.domain.UserData;
+import empik.kata.restapi.users.model.domain.UserNotFoundException;
 import empik.kata.restapi.users.model.domain.UserView;
 import empik.kata.restapi.users.model.domain.policies.DefaultCalculator;
 import empik.kata.restapi.users.model.port.UserQueryService;
@@ -52,6 +53,16 @@ class UserQueryServiceNonBlockingTest {
         create(userQueryServiceNonBlocking.getUser("login"))
                 .expectNext(user.getUserView())
                 .verifyComplete();
+    }
+
+
+    @Test
+    void shouldThrowException_whenUserNotFound() {
+        when(users.find(anyString())).thenReturn(Mono.error(new UserNotFoundException()));
+
+        create(userQueryServiceNonBlocking.getUser("login"))
+                .expectError(UserNotFoundException.class)
+                .verify();
     }
 
 }

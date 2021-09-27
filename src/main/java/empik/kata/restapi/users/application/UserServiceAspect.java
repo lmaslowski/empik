@@ -13,7 +13,7 @@ import java.util.UUID;
 @Aspect
 @Service
 @AllArgsConstructor
-public class UserServiceAspect {
+class UserServiceAspect {
 
     private final EventPublisher eventPublisher;
 
