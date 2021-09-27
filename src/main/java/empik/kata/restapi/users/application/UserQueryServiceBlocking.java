@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @AllArgsConstructor
 @Service
-public class UserQueryServiceBlocking implements UserQueryService<UserView> {
+class UserQueryServiceBlocking implements UserQueryService<UserView> {
 
     private final Users<Optional<User>> users;
 

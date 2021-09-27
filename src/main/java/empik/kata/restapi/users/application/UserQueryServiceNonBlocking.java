@@ -13,7 +13,7 @@ import reactor.core.scheduler.Schedulers;
 @AllArgsConstructor
 @Service
 @Slf4j
-public class UserQueryServiceNonBlocking implements UserQueryService<Mono<UserView>> {
+class UserQueryServiceNonBlocking implements UserQueryService<Mono<UserView>> {
 
     private final Users<Mono<User>> users;
 
